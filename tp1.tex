@@ -12,6 +12,7 @@
 \usepackage{hyperref}
 \usepackage{float}
 \usepackage[most]{tcolorbox}
+\usepackage{longtable}
 
 \pagestyle{fancy} % Encabezado y pie de página
 \fancyhf{}
@@ -229,9 +230,47 @@ Etapa 5:
 		M0=karatsuba(8,2),M1=karatsuba(0,1),P=karatsuba(8,3).
 \end{lcverbatim}
 
-\subsubsection{Resolución de cada etapas, paso a paso}
+\newpage\subsubsection{Resolución de cada etapas, paso a paso}
 
 Ahora, conociendo los cálculos necesarios en cada etapa, comenzaremos a resolverlos desde la más profunda (los casos base, de $n=1$) hasta llegar a la más superficial (el problema planteado, de $n=8$).
+\par
+\vspace{3em}
+\par
+\begin{longtable}[r]{lllllll}
+%\begin{table}[]
+%\begin{tabular}{lllllll}
+
+1.1: & \multicolumn{6}{l}{ $ Karatsuba(33574113, 21986455) n=8 \implies D = 10^{\lceil 8/2\rceil} = 10^4$ }\\
+     & 1.1.1:     & \multicolumn{5}{l}{$X\_0 = 33574113 \mod 10^4 = 4113, \quad X\_1 = \lfloor 33574113 / 10^4 \rfloor = 3357$}     \\
+     & 1.1.2:     & \multicolumn{5}{l}{$Y\_0 = 21986455 \mod 10^4 = 6455, \quad Y\_1 = \lfloor 21986455 / 10^4 \rfloor = 2198$}     \\
+     & 1.1.3:     & \multicolumn{5}{l}{$P\_X = X\_0+X\_1 = 4113 + 3357 = 7470,\quad P\_Y = Y\_0+Y\_1 = 6455 + 2198 = 8653$}     \\
+     & 1.1.4:     & \multicolumn{5}{l}{$M\_0=karatsuba(4113,6455)=$ … Llamada a 2.1 ($n=4 \implies D=10^{\lceil 4/2\rceil} = 10^2$}     \\
+
+\multicolumn{2}{l}{}     & 2.1.1:     & \multicolumn{4}{l}{$X\_0=13, X\_1=41$}     \\
+\multicolumn{2}{l}{}     & 2.1.2:     & \multicolumn{4}{l}{$Y\_0=55, Y\_1=64$}     \\
+\multicolumn{2}{l}{}     & 2.1.3:     & \multicolumn{4}{l}{$P\_X=13+41=54, P\_Y=55+64=119$}     \\
+\multicolumn{2}{l}{}     & 2.1.4:     & \multicolumn{4}{l}{$M0=karatsuba(13,55)$. Llamada a 3.1 ($n=2,D=10$)}     \\
+
+\multicolumn{3}{l}{}     & 3.1.1:     & \multicolumn{3}{l}{}     \\
+\multicolumn{3}{l}{}     & 3.1.2:     & \multicolumn{3}{l}{}     \\
+\multicolumn{3}{l}{}     & 3.1.3:     & \multicolumn{3}{l}{}     \\
+\multicolumn{3}{l}{}     & 3.1.4:     & \multicolumn{3}{l}{$M0=karatsuba(3,5) = 15$}     \\
+\multicolumn{3}{l}{}     & 3.1.5:     & \multicolumn{3}{l}{$M1=karatsuba(1,5) = 5$}     \\
+\multicolumn{3}{l}{}     & 3.1.6:     & \multicolumn{3}{l}{$P=karatsuba(4,10)$. Llamada 4.3 ($n=2, D=10$)}     \\
+
+\multicolumn{4}{l}{}     & 4.3.1:     & \multicolumn{2}{l}{}     \\
+\multicolumn{4}{l}{}     & 4.3.2:     & \multicolumn{2}{l}{}     \\
+\multicolumn{4}{l}{}     & 4.3.3:     & \multicolumn{2}{l}{}     \\
+\multicolumn{4}{l}{}     & 4.3.4:     & \multicolumn{2}{l}{$M0=karatsuba(4,0)=0$}     \\
+\multicolumn{4}{l}{}     & 4.3.5:     & \multicolumn{2}{l}{$M1=karatsuba(0,1)=0$}     \\
+\multicolumn{4}{l}{}     & 4.4.6:     & \multicolumn{2}{l}{$P=karatsuba(4,1)=4$}     \\
+\multicolumn{4}{l}{}     & 4.3.7:     & \multicolumn{2}{l}{$\leftarrow 0\times 10^2 + (4-0-0)\times 10 = 0 + 40 + 0 = \boxed{40}$} \\
+
+\multicolumn{3}{l}{}     & 3.1.7:     & \multicolumn{3}{l}{$\leftarrow 5\times 10^2 + (40 - 5 - 15)\times 10 + 15 = 500 + 200 + 15 = \boxed{715}$}
+
+%\end{tabular}
+%\end{table}
+\end{longtable}
 
 \begin{lcverbatim}
     A completar
