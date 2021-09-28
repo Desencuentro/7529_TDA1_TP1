@@ -447,19 +447,18 @@ $=  737~868~600~000~000 + 307~098~090~000 + 26~549~415 = \boxed{\boxed{738175724
 
 \end{longtable}
 
-\begin{lcverbatim}
-    A completar
-\end{lcverbatim}
-
-\subsection{Cantidad de operaciones y complejidad}
+\newpage\subsection{Cantidad de operaciones y complejidad}
 
 \begin{tcolorbox}[colback=blue!5!white,colframe=blue!75!black,title=Enunciado 1.2]
     Cuente la cantidad de sumas y multiplicaciones que realiza y relaciónelo con la complejidad temporal del método.
 \end{tcolorbox}
 
-\begin{lcverbatim}
-    A completar
-\end{lcverbatim}
+Para realizar la cuenta \textbf{no} tomaremos en cuenta las multiplicaciones y divisiones de desplazamiento de posición, ya que con una buena elección de detalles de implementación (por ejemplo, para una implementación decimal usar BCD\footnote{Binary-Coded Decimal o Decimal codificado en binario.}) será O(1). En términos generales:
+\begin{itemize}
+    \item Para el cálculo de $P_X$ y $P_Y$ se requieren 2 sumas.
+    \item Para cada multiplicación, cuando ambos son de 1 cifra se considera 1, en caso contrario se desenrollará la recursión y se sumará cada elemento (detallado en el segundo par de filas).
+    \item Para la sumatoria final, se consideran 4 sumas: 2 para realizar $S = (P-M_1)-M_0$; y otras 2 para el resultado de cada etapa de recursión $(M_1\times K_1 + S\times K_S) + M_0$.\footnote{Como se explicó anteriormente, aunque el cambio de posición se formule como multiplicación por una potencia de la base del sistema elegido (decimal en este caso), no se tomará en cuenta.}
+\end{itemize}
 
 
 \subsection{Comparación con algoritmo tradicional}
