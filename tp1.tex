@@ -143,8 +143,9 @@ También definimos que trabajaremos en base decimal, por lo que en cada etapa de
     Es decir, sabiendo que $D = 10^{n/2}$:
     $$X_0 = X \mod D, \quad X_1 = \lfloor X / D \rfloor$$
     $$Y_0 = Y \mod D, \quad Y_1 = \lfloor Y / D \rfloor$$
-    \item Calculamos $P_X=X_0+X_1$ e $P_Y=Y_0+Y_1$.
-    \item Obtendremos recursivamente (para n>1) las 3 multuplicaciones: $M_0 = X_0\times Y_0$, $M_1 = X_1\times Y_1$, y $P = P_X\times P_Y$.
+    \item Calculamos\footnote{El uso de $P_X$, $P_Y$, $M_1$ y $M_2$ corresponde a una notación propia de este informe (para mayor claridad), no al material de estudio.} $P_X=X_0+X_1$ e $P_Y=Y_0+Y_1$.
+    \item Obtendremos recursivamente (para n>1) las 3 multiplicaciones\footnotemark[\value{footnote}]:
+    $$M_0 = X_0\times Y_0,\quad M_1 = X_1\times Y_1,\quad P = P_X\times P_Y$$
     \item Realizamos las sumas y desplazamientos (multiplicación por potencia de la base elegida: $10^k$):
     $$M_1\times 10^n + (P-M_1-M_0)\times 10^{n/2} + M_0$$
 \end{itemize}
