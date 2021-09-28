@@ -1,0 +1,221 @@
+\documentclass[titlepage,a4paper]{article}
+
+\usepackage{a4wide}
+\usepackage[colorlinks=true,linkcolor=black,urlcolor=blue,bookmarksopen=true]{hyperref}
+\usepackage{bookmark}
+\usepackage{fancyhdr}
+\usepackage{fancyvrb,newverbs,xcolor} % Para lcverbatim
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage[most]{tcolorbox}
+
+\pagestyle{fancy} % Encabezado y pie de página
+\fancyhf{}
+\fancyhead[L]{TdA1/TP1/106713/v1 - 106~713}
+\fancyhead[R]{Teoría de Algoritmos I - FIUBA}
+\renewcommand{\headrulewidth}{0.4pt}
+\fancyfoot[C]{\thepage}
+\renewcommand{\footrulewidth}{0.4pt}
+
+% lcverbatim = Cuadro de código con fondo gris
+\definecolor{cverbbg}{gray}{0.93}
+\newenvironment{lcverbatim}
+ {\SaveVerbatim{cverb}}
+ {\endSaveVerbatim
+  \flushleft\fboxrule=0pt\fboxsep=.5em
+  \colorbox{cverbbg}{%
+    \makebox[\dimexpr\linewidth-2\fboxsep][l]{\BUseVerbatim{cverb}}%
+  }
+  \endflushleft
+}
+
+\begin{document}
+\begin{titlepage} % Carátula
+	\hfill\includegraphics[width=6cm]{logofiuba.jpg}
+    \centering
+    \vfill
+    \Huge \textbf{Trabajo Práctico 1 — Karatsuba}
+    \vskip2cm
+    \Large [7529/9506] Teoría de Algoritmos I\\
+    Segundo cuatrimestre de 2021
+    \vfill
+    \begin{tabular}{ | l | l | } % Datos del alumno
+      \hline
+      Alumno: & XXXXX~XXXXX, Xxxx \\ \hline
+      Número de padrón: & 106~713 \\ \hline
+      Email: & XXXXXX@fi.uba.ar \\ \hline
+      Entrega: & nº 1 (29/09/2021) \\ \hline
+  	\end{tabular}
+    \vfill
+    \vfill
+\end{titlepage}
+
+\tableofcontents % Índice general
+\newpage
+
+\section{Introducción}\label{sec:intro}
+\subsection{Resumen}
+El presente informe documenta el enunciado y la solución del primer trabajo práctico de la materia Teoría de Algoritmos I. El mismo comprende la resolución manual de una multiplicación mediante el algoritmo de Karatsuba junto con su análisis, así como una parte teórica sobre recursividad y Teorema Maestro.
+
+Si bien este trabajo es individual, es redactado empleando el \href{http://aplica.rae.es/grweb/cgi-bin/v.cgi?i=OnqaThAvcEUygoXO}{plural de modestia} (tan usual en el ámbito académico).
+
+\subsection{Lineamientos básicos}
+\begin{itemize}
+\item El trabajo se realizará en forma individual.
+
+\item Se debe entregar el informe en formato pdf en el aula virtual de la materia.
+
+\item El informe debe presentar carátula con datos del autor y fecha de entrega. Debe incluir número de hoja en cada página.
+
+\item En caso de re-entrega, entregar un apartado con las correcciones mencionadas
+\end{itemize}
+
+\newpage\section{Parte 1: ¡Karatsuba!}\label{sec:parte1}
+
+\subsection{Enunciado}
+
+Dados los siguientes números (completada por su número de padrón):
+
+\begin{lcverbatim}
+    a35b411c
+    2d98ef55
+\end{lcverbatim}
+
+con:
+
+\begin{lcverbatim}
+    a: dígito del padrón correspondiente a la unidad
+    b: dígito del padrón correspondiente a la centena
+    c: los dos dígitos del padrón de la izquierda mod 7
+    d: dígito del padrón correspondiente a la decena
+    e: dígito del padrón correspondiente a la unidad de mil
+    f: los dos dígitos del padrón de la derecha mod 9
+\end{lcverbatim}
+
+Ejemplo. Padrón: 95473
+
+\begin{lcverbatim}
+33544114
+27985155
+\end{lcverbatim}
+
+\noindent Se pide:
+
+\begin{enumerate}
+\item Resuelva la multiplicación paso a paso utilizando el algoritmo de Karatsuba.
+
+\item Cuente la cantidad de sumas y multiplicaciones que realiza y relaciónelo con la complejidad temporal del método.
+
+\item Comparar lo obtenido con el método de multiplicación tradicional. ¿Observa alguna mejora? Analice.
+
+\item ¿Por qué se puede considerar al algoritmo de Karatsuba como de “división y conquista”?
+\end{enumerate}
+
+\newpage\subsection{Resolución con Karatusba}
+\begin{tcolorbox}[colback=blue!5!white,colframe=blue!75!black,title=Enunciado 1.1]
+    Resuelva la multiplicación paso a paso utilizando el algoritmo de Karatsuba.
+\end{tcolorbox}
+
+Comenzaremos realizando la adaptación del número según el padrón 106~713:
+\begin{lcverbatim}
+    a: dígito del padrón correspondiente a la unidad = 3
+    b: dígito del padrón correspondiente a la centena = 7
+    c: los dos dígitos del padrón de la izquierda mod 7 = 10 mod 7 = 3
+    d: dígito del padrón correspondiente a la decena = 1
+    e: dígito del padrón correspondiente a la unidad de mil = 6
+    f: los dos dígitos del padrón de la derecha mod 9 = 13 mod 9 = 4
+\end{lcverbatim}
+Por lo que el resultado es:
+\begin{lcverbatim}
+    33574113 
+    21986455
+\end{lcverbatim}
+
+\begin{lcverbatim}
+    A completar
+\end{lcverbatim}
+
+\subsection{Cantidad de operaciones y complejidad}
+
+\begin{tcolorbox}[colback=blue!5!white,colframe=blue!75!black,title=Enunciado 1.2]
+    Cuente la cantidad de sumas y multiplicaciones que realiza y relaciónelo con la complejidad temporal del método.
+\end{tcolorbox}
+
+\begin{lcverbatim}
+    A completar
+\end{lcverbatim}
+
+
+\subsection{Comparación con algoritmo tradicional}
+\begin{tcolorbox}[colback=blue!5!white,colframe=blue!75!black,title=Enunciado 1.3]
+    Comparar lo obtenido con el método de multiplicación tradicional. ¿Observa alguna mejora? Analice.
+\end{tcolorbox}
+
+\begin{lcverbatim}
+    A completar
+\end{lcverbatim}
+
+
+\subsection{División y conquista}
+
+\begin{tcolorbox}[colback=blue!5!white,colframe=blue!75!black,title=Enunciado 1.4]
+    ¿Por qué se puede considerar al algoritmo de Karatsuba como de “división y conquista”?
+\end{tcolorbox}
+
+\begin{lcverbatim}
+    A completar
+\end{lcverbatim}
+
+
+
+
+\newpage\section{Parte 2: Cuestión de complejidad…}\label{sec:parte2}
+
+\subsection{Enunciado}
+
+Dada la siguiente relación de recurrencia
+\begin{lcverbatim}
+    a T(n/b) + O(c)
+\end{lcverbatim}
+
+Con:
+
+\begin{lcverbatim}
+a: 1 + (los dos dígitos del padrón de la izquierda mod 9)
+b: 2 + (los dos dígitos del padrón de la izquierda mod 7)
+c: “n” si su padrón es múltiplo de 4, 
+   sino “nlogn” si su padrón es múltiplo de 3,
+   sino “n2”  \end{lcverbatim}
+\noindent Se pide:
+\begin{enumerate}
+\item Responda y complete: ¿Qué le falta a la relación de recurrencia para que se pueda aplicar el teorema maestro?
+
+\item Calcular la complejidad temporal utilizando el teorema maestro.
+
+\item Explique paso a paso cómo llega a la misma.
+
+\end{enumerate}
+
+\newpage\subsection{Teorema maestro}
+\begin{tcolorbox}[colback=blue!5!white,colframe=blue!75!black,title=Enunciado 2.1]
+    Responda y complete: ¿Qué le falta a la relación de recurrencia para que se pueda aplicar el teorema maestro?
+\end{tcolorbox}
+
+\subsection{Complejidad temporal}
+\begin{tcolorbox}[colback=blue!5!white,colframe=blue!75!black,title=Enunciado 2.2]
+    Calcular la complejidad temporal utilizando el teorema maestro.
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=blue!5!white,colframe=blue!75!black,title=Enunciado 2.3]
+    Explique paso a paso cómo llega a la misma.
+\end{tcolorbox}
+
+\begin{lcverbatim}
+    A completar
+\end{lcverbatim}
+
+\end{document}
