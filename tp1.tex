@@ -153,7 +153,13 @@ También definimos que trabajaremos en base decimal, por lo que en cada etapa de
 Una vez alcanzado el caso base, se obtendrá el resultado mediante una clásica tabla de multiplicar de 1 cifra decimal.
 
 \subsubsection{Etapas de recursión del caso dado}
-Para mantener la claridad de la explicación paso a paso, comenzaremos tan solo mostrando cuáles son las cuentas que deben realizarse en cada etapa de recursión. Como en cada etapa se hacen varias llamadas con el mismo tamaño, a los efectos de esta explicación las llamaremos subetapas.
+Para mantener la claridad de la explicación paso a paso, comenzaremos tan solo mostrando cuáles son las cuentas que deben realizarse en cada etapa de recursión.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{Karatsuba106713.drawio.png}
+\caption{\label{fig:etapas}}\textbf{Etapas de recursión de Karatsuba} para el caso dado. Cada nodo consiste del X e Y de cada llamada a la función, pero los casos bases (n=1) han sido omitidos. La parte inferior ($X_0$ e $Y_0$) han sido remarcadas con subrayados, mientras que la superior ($X_1$ e $Y_1$) con negritas. En verde el cálculo de $M_0$ (producto de partes inferiores), en azul $M_1$ (de partes superiores) y en rojo $P$ (producto de suma de partes equivalentes de cada entrada).
+\end{figure}
 
 \begin{lcverbatim}
     A completar
