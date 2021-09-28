@@ -160,9 +160,73 @@ Para mantener la claridad de la explicación paso a paso, comenzaremos tan solo 
 \includegraphics[width=\textwidth]{Karatsuba106713.drawio.png}
 \caption{\label{fig:etapas}}\textbf{Etapas de recursión de Karatsuba} para el caso dado. Cada nodo consiste del X e Y de cada llamada a la función, pero los casos bases (n=1) han sido omitidos. La parte inferior ($X_0$ e $Y_0$) han sido remarcadas con subrayados, mientras que la superior ($X_1$ e $Y_1$) con negritas. En verde el cálculo de $M_0$ (producto de partes inferiores), en azul $M_1$ (de partes superiores) y en rojo $P$ (producto de suma de partes equivalentes de cada entrada).
 \end{figure}
-
+El siguiente listado incluye todas las llamadas a la función, y en el caso en que corresponda (cuando n>1) se detalla qué función llama cada una:
 \begin{lcverbatim}
-    A completar
+Etapa 1:
+	Llamada 1.1: Karatsuba(33574113, 21986455). Req.:
+		M0=karatsuba(4113,6455),M1=karatsuba(3357,2198),P=karatsuba(7470,8653).
+\end{lcverbatim}
+\begin{lcverbatim}
+Etapa 2:
+	Llamada 2.1: Karatsuba(4113, 6455). Req.:
+		M0=karatsuba(13,55),M1=karatsuba(41,64),P=karatsuba(54,119).
+	Llamada 2.2: Karatsuba(3357, 2198). Req.:
+		M0=karatsuba(57,98),M1=karatsuba(33,21),P=karatsuba(90,119).
+	Llamada 2.3: Karatsuba(7470, 8653). Req.:
+		M0=karatsuba(70,53),M1=karatsuba(74,86),P=karatsuba(144,139).
+\end{lcverbatim}
+\begin{lcverbatim}
+Etapa 3:
+	Llamada 3.1: Karatsuba(13, 55). Req.:
+		M0=karatsuba(3,5),M1=karatsuba(1,5),P=karatsuba(4,10).
+	Llamada 3.2: Karatsuba(41, 64). Req.:
+		M0=karatsuba(1,4),M1=karatsuba(4,6),P=karatsuba(5,10).
+	Llamada 3.3: Karatsuba(54, 119). Req.:
+		M0=karatsuba(54,19),M1=karatsuba(0,1),P=karatsuba(54,20).
+	Llamada 3.4: Karatsuba(57, 98). Req.:
+		M0=karatsuba(7,8),M1=karatsuba(5,9),P=karatsuba(12,17).
+	Llamada 3.5: Karatsuba(33, 21). Req.:
+		M0=karatsuba(3,1),M1=karatsuba(3,2),P=karatsuba(6,3).
+	Llamada 3.6: Karatsuba(90, 119). Req.:
+		M0=karatsuba(90,19),M1=karatsuba(0,1),P=karatsuba(90,20).
+	Llamada 3.7: Karatsuba(70, 53). Req.:
+		M0=karatsuba(0,3),M1=karatsuba(7,5),P=karatsuba(7,8).
+	Llamada 3.8: Karatsuba(74, 86). Req.:
+		M0=karatsuba(4,6),M1=karatsuba(7,8),P=karatsuba(11,14).
+	Llamada 3.9: Karatsuba(144, 139). Req.:
+		M0=karatsuba(44,39),M1=karatsuba(1,1),P=karatsuba(45,40).
+\end{lcverbatim}
+\begin{lcverbatim}
+Etapa 4:
+	Llamada 4.3: Karatsuba(4, 10). Req.:
+		M0=karatsuba(4,0),M1=karatsuba(0,1),P=karatsuba(4,1).
+	Llamada 4.6: Karatsuba(5, 10). Req.:
+		M0=karatsuba(5,0),M1=karatsuba(0,1),P=karatsuba(5,1).
+	Llamada 4.7: Karatsuba(54, 19). Req.:
+		M0=karatsuba(4,9),M1=karatsuba(5,1),P=karatsuba(9,10).
+	Llamada 4.9: Karatsuba(54, 20). Req.:
+		M0=karatsuba(4,0),M1=karatsuba(5,2),P=karatsuba(9,2).
+	Llamada 4.12: Karatsuba(12, 17). Req.:
+		M0=karatsuba(2,7),M1=karatsuba(1,1),P=karatsuba(3,8).
+	Llamada 4.16: Karatsuba(90, 19). Req.:
+		M0=karatsuba(0,9),M1=karatsuba(9,1),P=karatsuba(9,10).
+	Llamada 4.18: Karatsuba(90, 20). Req.:
+		M0=karatsuba(0,0),M1=karatsuba(9,2),P=karatsuba(9,2).
+	Llamada 4.24: Karatsuba(11, 14). Req.:
+		M0=karatsuba(1,4),M1=karatsuba(1,1),P=karatsuba(2,5).
+	Llamada 4.25: Karatsuba(44, 39). Req.:
+		M0=karatsuba(4,9),M1=karatsuba(4,3),P=karatsuba(8,12).
+	Llamada 4.27: Karatsuba(45, 40). Req.:
+		M0=karatsuba(5,0),M1=karatsuba(4,4),P=karatsuba(9,4).
+\end{lcverbatim}
+\begin{lcverbatim}
+Etapa 5:
+	Llamada 5.9: Karatsuba(9, 10). Req.:
+		M0=karatsuba(9,0),M1=karatsuba(0,1),P=karatsuba(9,1).
+	Llamada 5.18: Karatsuba(9, 10). Req.:
+		M0=karatsuba(9,0),M1=karatsuba(0,1),P=karatsuba(9,1).
+	Llamada 5.27: Karatsuba(8, 12). Req.:
+		M0=karatsuba(8,2),M1=karatsuba(0,1),P=karatsuba(8,3).
 \end{lcverbatim}
 
 \subsubsection{Resolución de cada etapas, paso a paso}
