@@ -303,9 +303,12 @@ Ahora, conociendo los cálculos necesarios en cada etapa, comenzaremos a resolve
     ¿Por qué se puede considerar al algoritmo de Karatsuba como de “división y conquista”?
 \end{tcolorbox}
 
-\begin{lcverbatim}
-    A completar
-\end{lcverbatim}
+Para que un algoritmo sea considerado de "divide y conquista" debe dividir sus datos de entrada, \textbf{llamarse recursivamente}, una o varias veces, \textbf{con una fracción de los datos} (hasta un caso base que resulte trivial o se resuelva mediante otro algoritmo) y finalmente unificar los resultados para formar una solución.
+
+Es notable destacar que no es una condición necesaria que haya una relación unívoca entre las características de la división y la cantidad de llamadas. Así, pueden encontrarse algoritmos como la búsqueda binaria, en la que se fracciona en 2 partes iguales, pero sólo se invoca la recursión sobre una mitad. De manera análoga pero inversa, el algoritmo de Karatsuba realiza (excepto en el caso base) tres llamadas recursivas con datos de la mitad del tamaño de los de entrada.
+
+En todo caso, sí son condiciones necesarias que en cada llamada recursiva la cantidad de datos disminuya \textbf{acercándose al caso base}, y que el algoritmo aplicado sea el mismo. \textbf{Por todo esto, podemos afirmar que el algoritmo de Karatsuba puede considerarse como un algoritmo de “división y conquista”}.
+
 
 
 
