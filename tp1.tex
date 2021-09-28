@@ -248,25 +248,70 @@ Ahora, conociendo los cálculos necesarios en cada etapa, comenzaremos a resolve
 
 \multicolumn{2}{l}{}     & 2.1.1:     & \multicolumn{4}{l}{$X\_0=13, X\_1=41$}     \\
 \multicolumn{2}{l}{}     & 2.1.2:     & \multicolumn{4}{l}{$Y\_0=55, Y\_1=64$}     \\
-\multicolumn{2}{l}{}     & 2.1.3:     & \multicolumn{4}{l}{$P\_X=13+41=54, P\_Y=55+64=119$}     \\
+\multicolumn{2}{l}{}     & 2.1.3:     & \multicolumn{4}{l}{$P\_X=54, P\_Y=119$}     \\
 \multicolumn{2}{l}{}     & 2.1.4:     & \multicolumn{4}{l}{$M0=karatsuba(13,55)$. Llamada a 3.1 ($n=2,D=10$)}     \\
+\multicolumn{3}{l}{}     & 3.1.1:     & \multicolumn{3}{l}{$X\_0=3, X\_1=1$}     \\
+\multicolumn{3}{l}{}     & 3.1.2:     & \multicolumn{3}{l}{$Y\_0=5, Y\_1=5$}     \\
+\multicolumn{3}{l}{}     & 3.1.3:     & \multicolumn{3}{l}{$P\_X=4, P\_Y=10$}     \\
+\multicolumn{3}{l}{}     & 3.1.4:     & \multicolumn{3}{l}{$M0=karatsuba(3,5)$. Llamada a 4.1 ($n=1) = \boxed{15}$}     \\
+\multicolumn{3}{l}{}     & 3.1.5:     & \multicolumn{3}{l}{$M1=karatsuba(1,5)$. Llamada a 4.2 ($n=1) = \boxed{5}$}     \\
+\multicolumn{3}{l}{}     & 3.1.6:     & \multicolumn{3}{l}{$P=karatsuba(4,10)$. Llamada a 4.3 ($n=2,D=10$)}     \\
+\multicolumn{4}{l}{}     & 4.3.1:     & \multicolumn{2}{l}{$X\_0=4, X\_1=0$}     \\
+\multicolumn{4}{l}{}     & 4.3.2:     & \multicolumn{2}{l}{$Y\_0=0, Y\_1=1$}     \\
+\multicolumn{4}{l}{}     & 4.3.3:     & \multicolumn{2}{l}{$P\_X=4, P\_Y=1$}     \\
+\multicolumn{4}{l}{}     & 4.3.4:     & \multicolumn{2}{l}{$M0=karatsuba(4,0)$. Llamada a 5.1 ($n=1) = \boxed{0}$}     \\
+\multicolumn{4}{l}{}     & 4.3.5:     & \multicolumn{2}{l}{$M1=karatsuba(0,1)$. Llamada a 5.2 ($n=1) = \boxed{0}$}     \\
+\multicolumn{4}{l}{}     & 4.3.6:     & \multicolumn{2}{l}{$P=karatsuba(4,1)$. Llamada a 5.3 ($n=1) = \boxed{4}$}     \\
+\multicolumn{4}{l}{}     & 4.3.7:     & \multicolumn{2}{l}{$\leftarrow 0\times 100 + (4-0-0)\times 10 + 0 =  0\times 100 + 4\times 10 + 0 = \boxed{40}$}     \\
+\multicolumn{3}{l}{}     & 3.1.7:     & \multicolumn{3}{l}{$\leftarrow 5\times 100 + (40-5-15)\times 10 + 15 =  500 + 20\times 10 + 15 = \boxed{715}$}     \\
 
-\multicolumn{3}{l}{}     & 3.1.1:     & \multicolumn{3}{l}{}     \\
-\multicolumn{3}{l}{}     & 3.1.2:     & \multicolumn{3}{l}{}     \\
-\multicolumn{3}{l}{}     & 3.1.3:     & \multicolumn{3}{l}{}     \\
-\multicolumn{3}{l}{}     & 3.1.4:     & \multicolumn{3}{l}{$M0=karatsuba(3,5) = 15$}     \\
-\multicolumn{3}{l}{}     & 3.1.5:     & \multicolumn{3}{l}{$M1=karatsuba(1,5) = 5$}     \\
-\multicolumn{3}{l}{}     & 3.1.6:     & \multicolumn{3}{l}{$P=karatsuba(4,10)$. Llamada 4.3 ($n=2, D=10$)}     \\
+\multicolumn{2}{l}{}     & 2.1.5:     & \multicolumn{4}{l}{$M1=karatsuba(41,64)$. Llamada a 3.2 ($n=2,D=10$)}     \\
+\multicolumn{3}{l}{}     & 3.2.1:     & \multicolumn{3}{l}{$X\_0=1, X\_1=4$}     \\
+\multicolumn{3}{l}{}     & 3.2.2:     & \multicolumn{3}{l}{$Y\_0=4, Y\_1=6$}     \\
+\multicolumn{3}{l}{}     & 3.2.3:     & \multicolumn{3}{l}{$P\_X=5, P\_Y=10$}     \\
+\multicolumn{3}{l}{}     & 3.2.4:     & \multicolumn{3}{l}{$M0=karatsuba(1,4)$. Llamada a 4.4 ($n=1) = \boxed{4}$}     \\
+\multicolumn{3}{l}{}     & 3.2.5:     & \multicolumn{3}{l}{$M1=karatsuba(4,6)$. Llamada a 4.5 ($n=1) = \boxed{24}$}     \\
+\multicolumn{3}{l}{}     & 3.2.6:     & \multicolumn{3}{l}{$P=karatsuba(5,10)$. Llamada a 4.6 ($n=2,D=10$)}     \\
+\multicolumn{4}{l}{}     & 4.6.1:     & \multicolumn{2}{l}{$X\_0=5, X\_1=0$}     \\
+\multicolumn{4}{l}{}     & 4.6.2:     & \multicolumn{2}{l}{$Y\_0=0, Y\_1=1$}     \\
+\multicolumn{4}{l}{}     & 4.6.3:     & \multicolumn{2}{l}{$P\_X=5, P\_Y=1$}     \\
+\multicolumn{4}{l}{}     & 4.6.4:     & \multicolumn{2}{l}{$M0=karatsuba(5,0)$. Llamada a 5.4 ($n=1) = \boxed{0}$}     \\
+\multicolumn{4}{l}{}     & 4.6.5:     & \multicolumn{2}{l}{$M1=karatsuba(0,1)$. Llamada a 5.5 ($n=1) = \boxed{0}$}     \\
+\multicolumn{4}{l}{}     & 4.6.6:     & \multicolumn{2}{l}{$P=karatsuba(5,1)$. Llamada a 5.6 ($n=1) = \boxed{5}$}     \\
+\multicolumn{4}{l}{}     & 4.6.7:     & \multicolumn{2}{l}{$\leftarrow 0\times 100 + (5-0-0)\times 10 + 0 =  0 + 5\times 10 + 0 = \boxed{50}$}     \\
+\multicolumn{3}{l}{}     & 3.2.7:     & \multicolumn{3}{l}{$\leftarrow 24\times 100 + (50-24-4)\times 10 + 4 =  2400 + 22\times 10 + 4 = \boxed{2624}$}     \\
 
-\multicolumn{4}{l}{}     & 4.3.1:     & \multicolumn{2}{l}{}     \\
-\multicolumn{4}{l}{}     & 4.3.2:     & \multicolumn{2}{l}{}     \\
-\multicolumn{4}{l}{}     & 4.3.3:     & \multicolumn{2}{l}{}     \\
-\multicolumn{4}{l}{}     & 4.3.4:     & \multicolumn{2}{l}{$M0=karatsuba(4,0)=0$}     \\
-\multicolumn{4}{l}{}     & 4.3.5:     & \multicolumn{2}{l}{$M1=karatsuba(0,1)=0$}     \\
-\multicolumn{4}{l}{}     & 4.4.6:     & \multicolumn{2}{l}{$P=karatsuba(4,1)=4$}     \\
-\multicolumn{4}{l}{}     & 4.3.7:     & \multicolumn{2}{l}{$\leftarrow 0\times 10^2 + (4-0-0)\times 10 = 0 + 40 + 0 = \boxed{40}$} \\
-
-\multicolumn{3}{l}{}     & 3.1.7:     & \multicolumn{3}{l}{$\leftarrow 5\times 10^2 + (40 - 5 - 15)\times 10 + 15 = 500 + 200 + 15 = \boxed{715}$}
+\multicolumn{2}{l}{}     & 2.1.6:     & \multicolumn{4}{l}{$P=karatsuba(54,119)$. Llamada a 3.3 ($n=4,D=100$)}     \\
+\multicolumn{3}{l}{}     & 3.3.1:     & \multicolumn{3}{l}{$X\_0=54, X\_1=0$}     \\
+\multicolumn{3}{l}{}     & 3.3.2:     & \multicolumn{3}{l}{$Y\_0=19, Y\_1=1$}     \\
+\multicolumn{3}{l}{}     & 3.3.3:     & \multicolumn{3}{l}{$P\_X=54, P\_Y=20$}     \\
+\multicolumn{3}{l}{}     & 3.3.4:     & \multicolumn{3}{l}{$M0=karatsuba(54,19)$. Llamada a 4.7 ($n=2,D=10$)}     \\
+\multicolumn{4}{l}{}     & 4.7.1:     & \multicolumn{2}{l}{$X\_0=4, X\_1=5$}     \\
+\multicolumn{4}{l}{}     & 4.7.2:     & \multicolumn{2}{l}{$Y\_0=9, Y\_1=1$}     \\
+\multicolumn{4}{l}{}     & 4.7.3:     & \multicolumn{2}{l}{$P\_X=9, P\_Y=10$}     \\
+\multicolumn{4}{l}{}     & 4.7.4:     & \multicolumn{2}{l}{$M0=karatsuba(4,9)$. Llamada a 5.7 ($n=1) = \boxed{36}$}     \\
+\multicolumn{4}{l}{}     & 4.7.5:     & \multicolumn{2}{l}{$M1=karatsuba(5,1)$. Llamada a 5.8 ($n=1) = \boxed{5}$}     \\
+\multicolumn{4}{l}{}     & 4.7.6:     & \multicolumn{2}{l}{$P=karatsuba(9,10)$. Llamada a 5.9 ($n=2,D=10$)}     \\
+\multicolumn{5}{l}{}     & 5.9.1:     & \multicolumn{1}{l}{$X\_0=9, X\_1=0$}     \\
+\multicolumn{5}{l}{}     & 5.9.2:     & \multicolumn{1}{l}{$Y\_0=0, Y\_1=1$}     \\
+\multicolumn{5}{l}{}     & 5.9.3:     & \multicolumn{1}{l}{$P\_X=9, P\_Y=1$}     \\
+\multicolumn{5}{l}{}     & 5.9.4:     & \multicolumn{1}{l}{$M0=karatsuba(9,0)$. Llamada a 6.1 ($n=1) = \boxed{0}$}     \\
+\multicolumn{5}{l}{}     & 5.9.5:     & \multicolumn{1}{l}{$M1=karatsuba(0,1)$. Llamada a 6.2 ($n=1) = \boxed{0}$}     \\
+\multicolumn{5}{l}{}     & 5.9.6:     & \multicolumn{1}{l}{$P=karatsuba(9,1)$. Llamada a 6.3 ($n=1) = \boxed{9}$}     \\
+\multicolumn{5}{l}{}     & 5.9.7:     & \multicolumn{1}{l}{$\leftarrow 0\times 100 + (9)\times 10 + 0 =  0+ 9\times 10 + 0 = \boxed{90}$}     \\
+\multicolumn{4}{l}{}     & 4.7.7:     & \multicolumn{2}{l}{$\leftarrow 5\times 100 + (90-5-36)\times 10 + 36 =  500 + 49\times 10 + 36 = \boxed{1026}$}     \\
+\multicolumn{3}{l}{}     & 3.3.5:     & \multicolumn{3}{l}{$M1=karatsuba(0,1)$. Llamada a 4.8 ($n=1) = \boxed{0}$}     \\
+\multicolumn{3}{l}{}     & 3.3.6:     & \multicolumn{3}{l}{$P=karatsuba(54,20)$. Llamada a 4.9 ($n=2,D=10$)}     \\
+\multicolumn{4}{l}{}     & 4.9.1:     & \multicolumn{2}{l}{$X\_0=4, X\_1=5$}     \\
+\multicolumn{4}{l}{}     & 4.9.2:     & \multicolumn{2}{l}{$Y\_0=0, Y\_1=2$}     \\
+\multicolumn{4}{l}{}     & 4.9.3:     & \multicolumn{2}{l}{$P\_X=9, P\_Y=2$}     \\
+\multicolumn{4}{l}{}     & 4.9.4:     & \multicolumn{2}{l}{$M0=karatsuba(4,0)$. Llamada a 5.10 ($n=1) = \boxed{0}$}     \\
+\multicolumn{4}{l}{}     & 4.9.5:     & \multicolumn{2}{l}{$M1=karatsuba(5,2)$. Llamada a 5.11 ($n=1) = \boxed{10}$}     \\
+\multicolumn{4}{l}{}     & 4.9.6:     & \multicolumn{2}{l}{$P=karatsuba(9,2)$. Llamada a 5.12 ($n=1) = \boxed{18}$}     \\
+\multicolumn{4}{l}{}     & 4.9.7:     & \multicolumn{2}{l}{$\leftarrow 10\times 100 + (18-10-0)\times 10 + 0 =  1000 + 80 + 0 = \boxed{1080}$}     \\
+\multicolumn{3}{l}{}     & 3.3.7:     & \multicolumn{3}{l}{$\leftarrow 0\times 10^4 + (1080-1026)\times 100 + 1026 =  0 + 54\times 100 + 1026 = \boxed{6426}$}     \\
+\multicolumn{2}{l}{}     & 2.1.7:     & \multicolumn{4}{l}{$\leftarrow 2624\times 10^4 + (6426-2624-715)\times 100 + 715 =  2624\times 10000 + 3087\times 100 + 715 = \boxed{26549415}$}     \\
+     & 1.1.5:     & \multicolumn{5}{l}{$M1=karatsuba(3357,2198)$. Llamada a 2.2 ($n=4,D=100$)}     \\
 
 %\end{tabular}
 %\end{table}
