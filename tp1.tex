@@ -13,6 +13,8 @@
 \usepackage{float}
 \usepackage[most]{tcolorbox}
 \usepackage{longtable}
+\usepackage[clean]{svg}
+
 
 \pagestyle{fancy} % Encabezado y pie de página
 \fancyhf{}
@@ -158,9 +160,15 @@ Para mantener la claridad de la explicación paso a paso, comenzaremos tan solo 
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{Karatsuba106713.drawio.png}
-\caption{\label{fig:etapas}}\textbf{Etapas de recursión de Karatsuba} para el caso dado. Cada nodo consiste del X e Y de cada llamada a la función, pero los casos bases (n=1) han sido omitidos. La parte inferior ($X_0$ e $Y_0$) han sido remarcadas con subrayados, mientras que la superior ($X_1$ e $Y_1$) con negritas. En verde el cálculo de $M_0$ (producto de partes inferiores), en azul $M_1$ (de partes superiores) y en rojo $P$ (producto de suma de partes equivalentes de cada entrada).
+\includegraphics[width=\textwidth,angle=90,origin=c]{KaratsubaArbol.png}
+\caption{\label{fig:etapas}}\textbf{Etapas de recursión de Karatsuba} para el caso dado,
+donde cada nodo consiste del X e Y de cada llamada a la función. 
+Las mitades superior de X e Y ($X_0$ e $Y_0$) han sido coloreadas en azul
+y las inferiores ($X_1$ e $Y_1$) con rojo.
+Las flechas mantienen el color de las mitades que se usaron (rojo para $M_1$ y azul para $M_0$),
+o violeta para la que emplea la sumas $P$ (producto de suma de partes equivalentes de cada entrada).
 \end{figure}
+
 El siguiente listado incluye todas las llamadas a la función, y en el caso en que corresponda (cuando n>1) se detalla qué función llama cada una:
 \begin{lcverbatim}
 Etapa 1:
@@ -371,8 +379,12 @@ $=  26240000 + 308700 + 715 = \boxed{26549415}$
 \multicolumn{4}{l}{}     & 4.18.5:     & \multicolumn{2}{l}{$M1=karatsuba(9,2)$. Llamada a 5.20 ($n=1) = \boxed{18}$}     \\
 \multicolumn{4}{l}{}     & 4.18.6:     & \multicolumn{2}{l}{$P=karatsuba(9,2)$. Llamada a 5.21 ($n=1) = \boxed{18}$}     \\
 \multicolumn{4}{l}{}     & 4.18.7:     & \multicolumn{2}{l}{$\leftarrow 18\times 100 + (18-18-0)\times 10 + 0 =  1800 + 0 + 0 = \boxed{1800}$}     \\
-\multicolumn{3}{l}{}     & 3.6.7:     & \multicolumn{3}{l}{\begin{tabular}[l]{}$\leftarrow 0\times 10000 + (1800-0-1710)\times 100 + 1710 = $ \\ $=  0 + 9000 + 1710 = \boxed{10710}$ \end{tabular} }     \\
-\multicolumn{2}{l}{}     & 2.2.7:     & \multicolumn{4}{l}{ \begin{tabular}[l]{}
+\multicolumn{3}{l}{}     & 3.6.7:     & \multicolumn{3}{l}{
+\begin{tabular}{l}
+$\leftarrow 0\times 10000 + (1800-0-1710)\times 100 + 1710 = $\\$=  0 + 9000 + 1710 = \boxed{10710}$
+\end{tabular}
+}     \\
+\multicolumn{2}{l}{}     & 2.2.7:     & \multicolumn{4}{l}{ \begin{tabular}{l}
 $\leftarrow 693\times 10000 + (10710-5586-693)\times 100 + 5586 =$\\ $$=  6930000 + 443100 + 5586 = \boxed{7378686}$$
 \end{tabular} }     \\
      & 1.1.6:     & \multicolumn{5}{l}{$P=karatsuba(7470,8653)$. Llamada a 2.3 ($n=4,D=100$)}     \\
@@ -440,7 +452,7 @@ $\leftarrow 6364\times 10000 + (20016-6364-3710)\times 100 + 3710 =$\\$  6364000
 \end{tabular}
 }     \\
      & 1.1.7:     & \multicolumn{5}{l}{
-\begin{tabular}
+\begin{tabular}{l}
 $\leftarrow 7378686\times 10^8 + (64637910-7378686-26549415)\times 10^4 + 26549415 =$\\
 $=  737~868~600~000~000 + 307~098~090~000 + 26~549~415 = \boxed{\boxed{738175724639415}}$
 \end{tabular}}     \\
