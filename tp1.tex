@@ -156,20 +156,20 @@ También definimos que trabajaremos en base decimal, por lo que en cada etapa de
 Una vez alcanzado el caso base, se obtendrá el resultado mediante una clásica tabla de multiplicar de 1 cifra decimal.
 
 \subsubsection{Etapas de recursión del caso dado}
-Para mantener la claridad de la explicación paso a paso, comenzaremos tan solo mostrando cuáles son las cuentas que deben realizarse en cada etapa de recursión.
+Para mantener la claridad de la explicación paso a paso, comenzaremos tan solo mostrando cuáles son las distintas llamadas de recursión.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth,angle=90,origin=c]{KaratsubaArbol.png}
 \caption{\label{fig:etapas}}\textbf{Etapas de recursión de Karatsuba} para el caso dado,
 donde cada nodo consiste del X e Y de cada llamada a la función. 
-Las mitades superior de X e Y ($X_0$ e $Y_0$) han sido coloreadas en azul
-y las inferiores ($X_1$ e $Y_1$) con rojo.
+Las mitades superioreses de X e Y ($X_0$ e $Y_0$) han sido coloreadas en azul
+y las inferiores ($X_1$ e $Y_1$) con rojo.\\
 Las flechas mantienen el color de las mitades que se usaron (rojo para $M_1$ y azul para $M_0$),
 o violeta para la que emplea la sumas $P$ (producto de suma de partes equivalentes de cada entrada).
 \end{figure}
 
-El siguiente listado incluye todas las llamadas a la función, y en el caso en que corresponda (cuando n>1) se detalla qué función llama cada una:
+\newpage El siguiente listado incluye todas las llamadas a la función, y en el caso en que corresponda (cuando n>1) se detalla qué función llama cada una:
 \begin{lcverbatim}
 Etapa 1:
 	Llamada 1.1: Karatsuba(33574113, 21986455). Req.:
@@ -240,7 +240,8 @@ Etapa 5:
 
 \newpage\subsubsection{Resolución de cada etapas, paso a paso}
 
-Ahora, conociendo los cálculos necesarios en cada etapa, comenzaremos a resolverlos desde la más profunda (los casos base, de $n=1$) hasta llegar a la más superficial (el problema planteado, de $n=8$).
+Ahora, conociendo los cálculos necesarios en cada llamada y cada etapa, comenzaremos a resolverlos 
+desenrollando las recursiones desde la más superficial hasta las más profundas.
 \par
 \vspace{3em}
 \par
@@ -448,13 +449,14 @@ $\leftarrow 693\times 10000 + (10710-5586-693)\times 100 + 5586 =$\\ $$=  693000
 \multicolumn{3}{l}{}     & 3.9.7:     & \multicolumn{3}{l}{$\leftarrow 1\times 10^4 + (1800-1716-1)\times 100 + 1716 =  10000 + 8300 + 1716 = \boxed{20016}$}     \\
 \multicolumn{2}{l}{}     & 2.3.7:     & \multicolumn{4}{l}{
 \begin{tabular}{l}
-$\leftarrow 6364\times 10000 + (20016-6364-3710)\times 100 + 3710 =$\\$  63640000 + 994200 + 3710 = \boxed{64637910}$
+$\leftarrow 6364\times 10^4 + (20~016-6364-3710)\times 100 + 3710 =$\\
+$  63~640~000 + 994~200 + 3710 = \boxed{64~637~910}$
 \end{tabular}
 }     \\
      & 1.1.7:     & \multicolumn{5}{l}{
 \begin{tabular}{l}
-$\leftarrow 7378686\times 10^8 + (64637910-7378686-26549415)\times 10^4 + 26549415 =$\\
-$=  737~868~600~000~000 + 307~098~090~000 + 26~549~415 = \boxed{\boxed{738175724639415}}$
+$\leftarrow 7~378~686\times 10^8 + (64~637~910-7~378~686-26~549~415)\times 10^4 + 26~549~415 =$\\
+$=  737~868~600~000~000 + 307~098~090~000 + 26~549~415 = \boxed{\boxed{738~175~724~639~415}}$
 \end{tabular}}     \\
 
 \end{longtable}
@@ -465,12 +467,40 @@ $=  737~868~600~000~000 + 307~098~090~000 + 26~549~415 = \boxed{\boxed{738175724
     Cuente la cantidad de sumas y multiplicaciones que realiza y relaciónelo con la complejidad temporal del método.
 \end{tcolorbox}
 
-Para realizar la cuenta \textbf{no} tomaremos en cuenta las multiplicaciones y divisiones de desplazamiento de posición, ya que con una buena elección de detalles de implementación (por ejemplo, para una implementación decimal usar BCD\footnote{Binary-Coded Decimal o Decimal codificado en binario.}) será O(1). En términos generales:
+Para realizar la cuenta \textbf{no} tomaremos en cuenta las operaciones de desplazamiento posicional
+(expresadas como multiplicaciones por potencia de la base del sistema numeral) ni las separación del
+número en su parte alta y baja (expresadas como divisiones y residuos). Si bien han sido expresadas
+formalmente como tales, una buena elección de detalles de implementación (por ejemplo, para una
+implementación decimal usar BCD\footnote{Binary-Coded Decimal o Decimal codificado en binario.})
+será O(1). En términos generales observamos:
 \begin{itemize}
-    \item Para el cálculo de $P_X$ y $P_Y$ se requieren 2 sumas.
-    \item Para cada multiplicación, cuando ambos son de 1 cifra se considera 1, en caso contrario se desenrollará la recursión y se sumará cada elemento (detallado en el segundo par de filas).
-    \item Para la sumatoria final, se consideran 4 sumas: 2 para realizar $S = (P-M_1)-M_0$; y otras 2 para el resultado de cada etapa de recursión $(M_1\times K_1 + S\times K_S) + M_0$.\footnote{Como se explicó anteriormente, aunque el cambio de posición se formule como multiplicación por una potencia de la base del sistema elegido (decimal en este caso), no se tomará en cuenta.}
+    \item Para el cálculo de $P_X$ y $P_Y$ se requieren 2 sumas en total.
+    \item Para la sumatoria final, se consideran 4 sumas: 2 para realizar $S = (P-M_1)-M_0$;
+    y otras 2 para el resultado de cada etapa de recursión $(M_1\times K_1 + S\times K_S) + M_0$.
+    \footnote{Como se explicó anteriormente, aunque el cambio de posición se formule como multiplicación
+    por una potencia de la base del sistema elegido (decimal en este caso), no se tomará en cuenta.}
+    \item Para cada multiplicación, cuando ambos números son de 1 cifra se considera 1 operación.
+    En caso contrario se desenrollará la recursión y se sumará el costo de cada llamada,
+    más las 6 descritas en los puntos anteriores.
 \end{itemize}
+
+En el siguiente gráfico podemos ver el desarrollo completo.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth,angle=90,origin=c]{KaratsubaOps.png}
+    \caption{\label{fig:operaciones}}\textbf{Operaciones de suma y resta con Karatsuba} para el caso dado,
+    donde cada arco representa el costo en (sumas, multiplicaciones) de cada operación hija. Los nodos
+    hojas tienen todos costo $(0,1)$ (se representa con la flecha intermitente) y cada nodo padre tienen
+    el costo de sus nodos hijos más un adicional de $(6,0)$ del cómputo realizado por el algoritmo de Karatsuba.
+    \end{figure}
+
+En realidad, basta con saber (analizando el primer gráfico) que en este caso hay 53 multiplicaciones de
+una sola cifra (representadas por los nodos en negro) y 26 ejecuciones del algoritmo (nodos en color y
+con flechas), para calcularlo:
+$$Sumas = Ejecuciones * 6 \implies Sumas = 26 * 6 \implies \boxed{Sumas = 156}$$
+$$Multiplicaciones = NodosNegros \times 1 \implies \boxed{Multiplicaciones = 53}$$
+
 
 
 \subsection{Comparación con algoritmo tradicional}
