@@ -13,7 +13,7 @@
 \usepackage{float}
 \usepackage[most]{tcolorbox}
 \usepackage{longtable}
-\usepackage[clean]{svg}
+\usepackage{booktabs}
 
 
 \pagestyle{fancy} % Encabezado y pie de página
@@ -122,7 +122,7 @@ Ejemplo. Padrón: 95473
 \begin{tcolorbox}[colback=blue!5!white,colframe=blue!75!black,title=Enunciado 1.1]
     Resuelva la multiplicación paso a paso utilizando el algoritmo de Karatsuba.
 \end{tcolorbox}
-\subsubsection{Adaptación de productos al número de padrón}
+\subsubsection{Adaptación de factores al número de padrón}
 Comenzaremos realizando la adaptación del número según el padrón 106~713:
 \begin{lcverbatim}
     a: dígito del padrón correspondiente a la unidad = 3
@@ -140,7 +140,7 @@ Por lo que el resultado es:
 \subsubsection{Detalles generales y  de la función recursiva}
 También definimos que trabajaremos en base decimal, por lo que en cada etapa de recursión (hasta llegar a $n=1$):
 \begin{itemize}
-    \item convertiremos los productos $X$ e $Y$ en:
+    \item convertiremos los factores $X$ e $Y$ en:
     $$X \rightarrow X_1\times 10^{n/10}+X_0$$
     $$Y \rightarrow Y_1\times 10^{n/10}+Y_0$$
     Es decir, sabiendo que $D = 10^{\lceil n/2\rceil}$:
@@ -161,13 +161,14 @@ Para mantener la claridad de la explicación paso a paso, comenzaremos tan solo 
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth,angle=90,origin=c]{KaratsubaArbol.png}
-\caption{\label{fig:etapas}}\textbf{Etapas de recursión de Karatsuba} para el caso dado,
+\caption{\label{fig:etapas}\textbf{Etapas de recursión de Karatsuba} para el caso dado,
 donde cada nodo consiste del X e Y de cada llamada a la función. 
-Las mitades superioreses de X e Y ($X_0$ e $Y_0$) han sido coloreadas en azul
-y las inferiores ($X_1$ e $Y_1$) con rojo.\\
+Las mitades superiores\footnote{Emplearemos "superior" y "alta" como "más significativa"
+ e "inferior" y "baja" como "menos significativa".}
+ de X e Y ($X_0$ e $Y_0$) han sido coloreadas en azul y las inferiores ($X_1$ e $Y_1$) con rojo.\\
 Las flechas mantienen el color de las mitades que se usaron (rojo para $M_1$ y azul para $M_0$),
-o violeta para la que emplea la sumas $P$ (producto de suma de partes equivalentes de cada entrada).
-\end{figure}
+o violeta para la que emplea la sumas $P$ (de la mitad alta y baja de cada factor).}
+ \end{figure}
 
 \newpage El siguiente listado incluye todas las llamadas a la función, y en el caso en que corresponda (cuando n>1) se detalla qué función llama cada una:
 \begin{lcverbatim}
@@ -501,17 +502,42 @@ con flechas), para calcularlo:
 $$Sumas = Ejecuciones * 6 \implies Sumas = 26 * 6 \implies \boxed{Sumas = 156}$$
 $$Multiplicaciones = NodosNegros \times 1 \implies \boxed{Multiplicaciones = 53}$$
 
-
-
 \subsection{Comparación con algoritmo tradicional}
 \begin{tcolorbox}[colback=blue!5!white,colframe=blue!75!black,title=Enunciado 1.3]
     Comparar lo obtenido con el método de multiplicación tradicional. ¿Observa alguna mejora? Analice.
 \end{tcolorbox}
 
-\begin{lcverbatim}
-    A completar
-\end{lcverbatim}
+El algoritmo tradicional requiere $n^"$ multiplicaciones de 1 cifra (siendo n el tamaño máximo de ambos
+factores), y $n-1$ operaciones de suma de cifras arbitrarias. En este caso, serían (8,64). Si bien Karatsuba
+ya proveé una mejora en la cantidad de multiplicaciones de casi 18\% menos, la cantidad de sumas es de más
+de 1800 \% veces superior.
 
+De todas formas, las operaciones de suma que se realizan en Karatsuba son, en un porcentaje relevante,
+de números de menor cantida de cifras. Sabiendo que las computadoras no tienen la capacidad de sumar
+números arbitrarios de grandes cifras en una sola operación y que el análisis de complejidad de
+algoritmos se torna relevante a medida que N crece significativamente, nos puede parecer prudente
+comparar también las sumas de 1 cifra.
+
+Puede observarse que tenemos un solo caso, la ejecución incial, en el que la cantidad de cifras sumadas
+en el algoritmo de Karatsuba es N, mientras que en las restantes va disminuyendo.
+Mientras que en el algoritmo tradicional cada suma de dos sumandos de cifras arbitrarias es,
+en realidad, de $(n+1)$ cifras; es decir, es $O(n^2)$. Un análisis formal y estricto de todos los casos
+excede el objeto de este TP, pero podemos analizar la instancia planteada:
+
+\begin{table}[H]
+    \begin{tabular}{@{}cccc@{}}
+    \toprule
+    \textbf{Cifras} & \textbf{Sumas} & \textbf{Veces} & \textbf{Sumas de 1 cifra} \\ \midrule
+    8               & 6              & 1              & 48                        \\
+    4               & 6              & 6              & 144                       \\
+    2               & 6              & 19             & 228                       \\
+    \multicolumn{2}{c}{Total}        & 26             & \textbf{420}              \\ \bottomrule
+    \end{tabular}
+    \end{table}
+
+Si bien siguen siendo bastantes más sumas, siendo $420/64$ es un 560 \% adicional.
+Y por las características del algoritmo este número también tiene una cota superior menor que
+la del algoritmo tradicional.
 
 \subsection{División y conquista}
 
