@@ -14,7 +14,7 @@
 \usepackage[most]{tcolorbox}
 \usepackage{longtable}
 \usepackage{booktabs}
-
+\usepackage{cancel}
 
 \pagestyle{fancy} % Encabezado y pie de página
 \fancyhf{}
@@ -586,17 +586,54 @@ c: “n” si su padrón es múltiplo de 4,
     Responda y complete: ¿Qué le falta a la relación de recurrencia para que se pueda aplicar el teorema maestro?
 \end{tcolorbox}
 
+Comencemos adaptando la consigna al número de padrón:
+\begin{lcverbatim}
+    a: 1 + (los dos dígitos del padrón de la izquierda mod 9) = 1+(10 mod 9)=1+1 = 2
+    b: 2 + (los dos dígitos del padrón de la izquierda mod 7) = 2+(10 mod 7)=2+3 = 5
+    c: “n” si su padrón es múltiplo de 4, 
+       sino “nlogn” si su padrón es múltiplo de 3, => c = n log n
+       sino “n2”
+\end{lcverbatim}
+Por lo tanto:
+$T(n) = 2 T(n/5) + f(n)$ para una $f(n) con O(n log n)$.
+
+A la relación de recurrencia dada, para poder aplicar el teorema maestro, le falta:
+\begin{itemize}
+    \item Indicar que el caso base es una constante.
+\end{itemize}
+
 \subsection{Complejidad temporal}
 \begin{tcolorbox}[colback=blue!5!white,colframe=blue!75!black,title=Enunciado 2.2]
     Calcular la complejidad temporal utilizando el teorema maestro.
 \end{tcolorbox}
 
+La complejidad de $T(n) = 2 T(n/5) + f(n)$ para una $f(n) con O(n log n)$ es: $T(n)=\Omega(n log(n))$
+
 \begin{tcolorbox}[colback=blue!5!white,colframe=blue!75!black,title=Enunciado 2.3]
     Explique paso a paso cómo llega a la misma.
 \end{tcolorbox}
+\begin{itemize}
+    \item Verificamos (caso 2) si la complejidad de f(n), dada como $O(n log n)$ es posible acotarla, tanto inferior como
+    superiormente, con la que que propone el teorema maestro como $O(n^{log_b a})$; es decir, con
+    $O(n^{log_5 2}) \approx O(n^{0.43...})$, pero no podemos.
+    \item Nos enfocamos en el caso 1, mirando si es posible acotarla superiormente con
+    $O(n^{log_5 2 - \epsilon}  \approx O(n^{0.43... - \epsilon}))$
+    con un $\epsilon>0$. Pero a medida que aumentamos el $e$, obtenemos un resultado inferior.
+    \item Buscamos si es posible encontrar un $\epsilon > 0$ tal que $O(n^{log_5 2 + \epsilon}$ pueda acotar
+    \textbf{inferiormente} a $f(n)$, es decir a $O(n log n)$. Encontramos que valores pequeños, por ejemplo
+    $\epsilon = 0.1$ es una cota inferior a $f(n)$.
+    \item Verificamos el caso 3, si existe un valor constante $c < 1$ tal que $a \times f(n/b) \leq c \times f(n)$.
+    Es decir que $2 \times f(n/5) \leq c \times f(n)$
+    $\implies 2 \times (n/5)\times log(n/5) \leq c \times n log(n)$.
+    Lo que se cumple para $c=2/5$, siendo que:
+    $$2 \times (n/5)\times log(n/5) \leq (2/5) \times n log(n)$$
+    $$\cancel{(2/5)} \times n \times log(n/5) \leq \cancel{(2/5)} \times n log(n)$$
+    $$\cancel{n} \times log(n/5) \leq \cancel{n} log(n)$$
+    $$\cancel{log(n)}-log(5) \leq 0+\cancel{log(n)}$$
+    $$-log(5) \leq 0$$
+\end{itemize}
 
-\begin{lcverbatim}
-    A completar
-\end{lcverbatim}
+Por lo tanto, siguiendo la conclusión del caso 3, la complejidad se corresponde con la de
+la función f(n).
 
 \end{document}
